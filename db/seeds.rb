@@ -111,14 +111,17 @@ all_tests = [
 ]
 
 all_tests.each do |t|
-  test_object = Test.create(title: t[:title], level: t[:level], description: t[:description],
+  test_object = Test.create!(title: t[:title], level: t[:level], description: t[:description],
   category_id: t[:category].id, author_id: user_mary.id)
 
   t[:questions].each do |q|
-    question_object = Question.create(question_text: q[:question_text], test_id: test_object.id)
+    question_object = Question.create!(question_text: q[:question_text], test_id: test_object.id)
 
     q[:answers].each do |a|
-      Answer.create(answer_text: a[:answer_text], correct: a[:correct], question_id: question_object.id)
+      Answer.create!(answer_text: a[:answer_text], correct: a[:correct], question_id: question_object.id)
     end
   end
+
+  Result.create!(user_id: user_james.id, test_id: test_object.id)
 end
+
