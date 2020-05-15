@@ -10,20 +10,15 @@ class Test < ApplicationRecord
                                     greater_than_or_equal_to: 0 }
   validates :title, uniqueness: {scope: :level}
 
-  scope :tests_by_level, lambda { |level|
-    case level
-    when :easy
-      where(level: 0..1)
-    when :medium
-      where(level: 2..4)
-    when :hard
-      where(level: 5..Float::INFINITY)
-    end
-  }
+  scope :easy_tests, -> { where(level: 0..1) }
+  scope :medium_tests, -> { where(level: 2..4) }
+  scope :hard_tests, -> { where(level: 5..Float::INFINITY) }
+  scope :by_category, ->(category_name) { joins(:category)
+                                          .where(categories: { title: category_name })
+                                          .order(title: :desc)
+                                        }
 
-  scope :names_by_category, ->(category_name) { joins(:category)
-                                                .where(categories: { title: category_name })
-                                                .order(title: :desc)
-                                                .pluck(:title) 
-                                              }
+  def self.names_by_category(category_name)
+    by_category(category_name).pluck(:title)
+  end
 end
