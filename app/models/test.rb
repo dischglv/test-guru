@@ -5,10 +5,20 @@ class Test < ApplicationRecord
   has_many :results, dependent: :destroy
   has_many :users, through: :results
 
-  def self.names_by_category(category_name)
-    Test.joins(:categories)
-        .where(categories: { title: category_name })
-        .order(title: :desc)
-        .pluck(:title)
-  end
+  scope :tests_by_level, lambda { |level|
+    case level
+    when :easy
+      where(level: 0..1)
+    when :medium
+      where(level: 2..4)
+    when :hard
+      where(level: 5..Float::INFINITY)
+    end
+  }
+
+  scope :names_by_category, ->(category_name) { joins(:category)
+                                                .where(categories: { title: category_name })
+                                                .order(title: :desc)
+                                                .pluck(:title) 
+                                              }
 end
