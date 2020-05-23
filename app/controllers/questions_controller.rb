@@ -19,8 +19,7 @@ class QuestionsController < ApplicationController
     render plain: result
   end
 
-  def new
-  end
+  def new; end
 
   def create
     question = @test.questions.create(question_params)
