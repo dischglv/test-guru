@@ -1,0 +1,9 @@
+<li>
+  <%= question.question_text %>
+  <%= link_to 'Смотреть', question_path(question) %>
+  <%= link_to 'Редактировать', edit_question_path(question) %>
+  <%= link_to 'Удалить',
+              question_path(question),
+              method: :delete,
+              data: { confirm: 'Вы уверены?' } %>
+</li>
