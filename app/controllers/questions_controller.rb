@@ -5,13 +5,9 @@ class QuestionsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
-  def show
-    @question
-  end
+  def show; end
 
-  def edit
-    @question
-  end
+  def edit; end
 
   def new
     @question = @test.questions.new

@@ -8,17 +8,13 @@ class TestsController < ApplicationController
     @tests = Test.all
   end
 
-  def show
-    @test
-  end
+  def show; end
 
   def new
     @test = Test.new
   end
 
-  def edit
-    @test
-  end
+  def edit; end
 
   def create
     @test = Test.new(test_params)
