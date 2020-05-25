@@ -1,0 +1,6 @@
+<h2>Вопрос</h2>
+<p><%= @question.question_text %><br>
+из теста <%= @question.test.title %></p>
+
+<%= link_to 'Редактировать', edit_question_path(@question)%>
+<%= link_to 'Все вопросы теста', test_path(@question.test) %>
