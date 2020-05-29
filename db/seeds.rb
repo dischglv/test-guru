@@ -122,6 +122,6 @@ all_tests.each do |t|
     end
   end
 
-  Result.create!(user_id: user_james.id, test_id: test_object.id)
+  # Test_Passage.create!(user_id: user_james.id, test_id: test_object.id)
 end
 

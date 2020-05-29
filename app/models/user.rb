@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :results, dependent: :destroy
-  has_many :tests, through: :results
+  has_many :test_passages, dependent: :destroy
+  has_many :tests, through: :test_passages
   has_many :created_tests, inverse_of: :author, class_name: "Test",
             dependent: :nullify, foreign_key: "author_id"
 
