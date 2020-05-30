@@ -1,5 +1,7 @@
 <h1>Прохождение теста <%= @test_passage.test.title %></h1>
 
+<p>Вопрос <%= test_progress(@test_passage) %></p>
+
 <b>
   <%= @test_passage.current_question.question_text %>
 </b>

@@ -21,4 +21,9 @@ class Test < ApplicationRecord
   def self.names_by_category(category_name)
     by_category(category_name).pluck(:title)
   end
+
+  def number_of_questions
+    questions.count
+  end
+  
 end
