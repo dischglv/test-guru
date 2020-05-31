@@ -1,0 +1,20 @@
+<h1>Тест <%= @test_passage.test.title %> был завершен!</h1>
+
+<% if @test_passage.success? %>
+
+  <div class="success">
+    <b><%= @test_passage.stats %> %</b>
+    <p>Тест пройден успешно</p>
+  </div>
+
+<% else %>
+
+  <div class="failure">
+    <b><%= @test_passage.stats %> %</b>
+    <p>Тест не пройден</p>
+  </div>
+
+<% end %>
+
+<%= link_to 'Все тесты', tests_path %> |
+<%= link_to 'Заново', start_test_path(@test_passage.test), method: :post %>

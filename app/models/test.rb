@@ -2,8 +2,8 @@ class Test < ApplicationRecord
   belongs_to :category, optional: true
   belongs_to :author, class_name: "User", foreign_key: "author_id", optional: true
   has_many :questions, dependent: :destroy
-  has_many :results, dependent: :destroy
-  has_many :users, through: :results
+  has_many :test_passages, dependent: :destroy
+  has_many :users, through: :test_passages
 
   validates :title, presence: true
   validates :level, numericality: { only_integer: true,
@@ -21,4 +21,9 @@ class Test < ApplicationRecord
   def self.names_by_category(category_name)
     by_category(category_name).pluck(:title)
   end
+
+  def number_of_questions
+    questions.count
+  end
+  
 end
