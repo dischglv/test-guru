@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <p class="nav user">Добро пожаловать, <b><%= current_user.name %></b></p>
+    <% end %>
+
     <%= yield %>
 
     <%= render 'shared/footer' %>
