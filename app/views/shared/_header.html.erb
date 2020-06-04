@@ -1,0 +1,23 @@
+<header>
+  <div class="header-name">
+    <%= link_to 'TestGuru', root_url %>
+  </div>
+
+  <% if logged_in? %>
+  
+    <div class="nav user">
+      <p>Добро пожаловать, <b> гуру <%= current_user.name %></b> |
+      <%= link_to 'Выход', logout_path, method: :delete %></p>
+    </div>
+  
+  <% else %>  
+  
+    <div class="nav user">
+      <p>
+        <%= link_to 'Вход', login_path %> |
+        <%= link_to 'Регистрация', signup_path %>
+      </p>
+    </div>
+    
+  <% end %>
+</header>

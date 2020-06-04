@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :created_tests, class_name: "Test",
             dependent: :nullify, foreign_key: "author_id"
 
+  validates :email, presence: true,
+                    uniqueness: true,
+                    format: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+
   has_secure_password
 
   def test_passage(test)
