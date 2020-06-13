@@ -25,4 +25,20 @@ class User < ApplicationRecord
     tests.where(level: level)
   end
 
+  def admin?
+    is_a? Admin
+  end
+
+  def nickname
+    if first_name.present?
+      if last_name.present?
+        nickname = "#{last_name} #{first_name}"
+      else
+        nickname = first_name
+      end
+    else
+      nickname = email
+    end
+  end
+
 end

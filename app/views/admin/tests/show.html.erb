@@ -2,11 +2,10 @@
 
 <div>
   <ol>
-  <%#= render @test.questions %>
-  <%= render partial: 'questions/question', collection: @test.questions %>
+  <%= render @test.questions %>
   </ol>
 </div>
 
 <%= link_to 'Редактировать тест', edit_admin_test_path(@test) %> |
-<%= link_to 'Новый вопрос', new_test_question_path(@test) %> |
+<%= link_to 'Новый вопрос', new_admin_test_question_path(@test) %> |
 <%= link_to 'Все тесты', admin_tests_path %>

@@ -6,7 +6,7 @@
   <% if user_signed_in? %>
   
     <div class="nav user">
-      <p>Добро пожаловать, <b> <%= current_user.name %></b> гуру |
+      <p>Добро пожаловать, <b> <%= current_user.email %></b> гуру |
       <%= link_to 'Выход', destroy_user_session_path, method: :delete %></p>
     </div>
   <% end %>

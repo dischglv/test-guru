@@ -1,0 +1,17 @@
+<h1>Ответ</h1>
+
+<p>
+  <%= @answer.question.question_text %>
+</p>
+
+<p>
+  <b>Ответ:</b>
+  <%= @answer.answer_text %>
+</p>
+
+<p>
+  <b>Правильность:</b>
+  <%= answer_correct(@answer) %>
+</p>
+
+<%= link_to 'Назад', admin_question_path(@answer.question) %>
