@@ -6,7 +6,7 @@ Rails.application.routes.draw do
               path: :gurus,
               path_names: { sign_in: :login, sign_out: :logout }
 
-  resources :tests do
+  resources :tests, only: :index do
     resources :questions, except: :index, shallow: true do
       resources :answers, shallow: true, except: :index
     end
@@ -22,4 +22,8 @@ Rails.application.routes.draw do
     end
   end
   
+  namespace :admin do
+    resources :tests
+  end
+
 end
