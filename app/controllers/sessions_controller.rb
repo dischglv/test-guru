@@ -1,23 +1,9 @@
-class SessionsController < ApplicationController
+class SessionsController < Devise::SessionsController
 
-  def new; end
+  after_action :custom_welcome, only: :create
 
-  def create
-    user = User.find_by(email: params[:email])
-
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to cookies.delete(:original_url) || tests_path
-    else
-      flash.now[:alert] = 'Неверный логин или пароль'
-      render :new
-    end
-  end
-
-  def destroy
-    session.delete(:user_id)
-    @current_user = nil
-    redirect_to login_path
+  def custom_welcome
+    flash[:notice] = "Привет, #{current_user.nickname}!"
   end
 
 end
