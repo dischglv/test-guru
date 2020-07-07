@@ -3,5 +3,7 @@ ru:
 
   test_passages:
     gist:
-      success: "Gist успешно сохранен!"
+      success_message: "Gist успешно сохранен! %{href}"
+      success_link: "Ссылка на Gist"
       failure: "Во время сохранения gist произошла ошибка"
+      description: "Вопрос из теста %{test}"
