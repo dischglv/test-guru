@@ -30,7 +30,7 @@ class TestPassagesController < ApplicationController
                                       url: result[:html_url],
                                       question: @test_passage.current_question)
 
-      flash[:notice] = t(".success_message", href: view_context.link_to('Ссылка на Gist', gist.url)).html_safe
+      flash[:notice] = t(".success_message", href: view_context.link_to('Ссылка на Gist', gist.url))
     else
       flash[:alert] = t('.failure')
     end
