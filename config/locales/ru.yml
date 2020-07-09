@@ -1,2 +1,9 @@
 ru:
   hello: "Привет"
+
+  test_passages:
+    gist:
+      success_message: "Gist успешно сохранен! %{href}"
+      success_link: "Ссылка на Gist"
+      failure: "Во время сохранения gist произошла ошибка"
+      description: "Вопрос из теста %{test}"
