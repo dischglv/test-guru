@@ -36,6 +36,10 @@ gem 'faraday'
 # AUTH
 gem 'devise', '~> 4.0'
 
+# UI
+
+gem 'octicons_helper'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
