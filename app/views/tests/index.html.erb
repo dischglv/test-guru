@@ -2,7 +2,11 @@
 
 <table>
   <tr>
-    <th>Название</th>
+    <th class='sort-by-title pointer'>
+      Название
+      <%= octicon 'arrow-up', class: 'text-success hide' %>
+      <%= octicon 'arrow-down', class: 'text-success hide'%>
+    </th>
     <th>Уровень</th>
     <th>Количество вопросов</th>
     <th>Действия</th>

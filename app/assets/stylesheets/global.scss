@@ -1,3 +1,16 @@
+$failure-color: #f54646;
+$success-color: #32a854; 
+
+.success {
+  color: $success-color;
+  fill: $success-color;
+}
+
+.failure {
+  color: $failure-color;
+  fill: $failure-color;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -5,3 +18,4 @@
 .hide {
   display: none;
 }
+
