@@ -5,6 +5,11 @@ class TestPassage < ApplicationRecord
 
   before_validation :before_validation_set_current_question
 
+
+  def current_progress
+    (100 * (current_question_number - 1) / test.number_of_questions).round
+  end
+
   def current_question_number
     test.questions.order(:id).where('id <= :question_id', question_id: current_question.id).count
   end
