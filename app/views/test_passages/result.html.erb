@@ -1,3 +1,5 @@
+<%= content_tag :div, '', class: 'progress-bar', data: { progress: 100 } %>
+
 <h1>Тест <%= @test_passage.test.title %> был завершен!</h1>
 
 <% if @test_passage.success? %>
