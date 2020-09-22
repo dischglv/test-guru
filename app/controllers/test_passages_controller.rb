@@ -2,7 +2,6 @@ class TestPassagesController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_test_passage, only: %i[show update result gist]
-  before_action :set_badge_manager, only: :update
 
   def show; end
 
@@ -15,7 +14,7 @@ class TestPassagesController < ApplicationController
       badge_manager = BadgeManager.new
       badges = badge_manager.award_badges(@test_passage)
       current_user.badges << badges
-      
+
       TestsMailer.completed_test(@test_passage).deliver_now
       redirect_to result_test_passage_path(@test_passage)
     else
@@ -48,9 +47,4 @@ class TestPassagesController < ApplicationController
   def find_test_passage
     @test_passage = TestPassage.find(params[:id])
   end
-
-  def set_badge_manager
-    @badge_manager = BadgeManager.new
-  end
-
 end
