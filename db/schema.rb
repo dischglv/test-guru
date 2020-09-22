@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_113850) do
+ActiveRecord::Schema.define(version: 2020_09_22_120925) do
 
   create_table "answers", force: :cascade do |t|
     t.text "answer_text", null: false
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2020_07_07_113850) do
     t.integer "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "badges", primary_key: "badge_id", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "img_url", null: false
+    t.string "rule", null: false
+    t.integer "category_id"
+    t.integer "level"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_badges_on_category_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -51,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_113850) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "current_question_id"
     t.integer "correct_questions", default: 0
+    t.boolean "passed", default: false
     t.index ["current_question_id"], name: "index_test_passages_on_current_question_id"
     t.index ["test_id"], name: "index_test_passages_on_test_id"
     t.index ["user_id"], name: "index_test_passages_on_user_id"
@@ -65,6 +77,15 @@ ActiveRecord::Schema.define(version: 2020_07_07_113850) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["title", "level"], name: "index_tests_on_title_and_level", unique: true
+  end
+
+  create_table "user_badges", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "badge_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["badge_id"], name: "index_user_badges_on_badge_id"
+    t.index ["user_id"], name: "index_user_badges_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
