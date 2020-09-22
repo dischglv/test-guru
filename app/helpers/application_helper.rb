@@ -15,7 +15,6 @@ module ApplicationHelper
   }
 
   def badge_type(badge)
-    badge.rule
     BADGE_TYPES[badge.rule]
   end
 
