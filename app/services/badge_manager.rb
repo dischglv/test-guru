@@ -16,9 +16,7 @@ class BadgeManager
   end
 
 
-  def award_badges(test_passage)
-    @test_passage = test_passage
-
+  def award_badges
     Badge.all.select { |badge| 
       send("#{badge.rule}?", badge) }
   end
