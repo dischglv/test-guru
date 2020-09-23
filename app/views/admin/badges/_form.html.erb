@@ -17,8 +17,8 @@
   </p>
 
    <p>
-    <%= form.label :category_id %><br>
-    <%= form.collection_select :category_id, Category.all, :id, :title, prompt: true, id: :badge_category %>
+    <%= form.label :rule_value %><br>
+    <%= form.text_field :rule_value, id: :badge_rule_value %>
   </p>
 
    <p>

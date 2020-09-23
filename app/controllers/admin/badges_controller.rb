@@ -45,7 +45,7 @@ class Admin::BadgesController < Admin::BaseController
   end
 
   def badge_params
-    params.require(:badge).permit(:name, :img_url, :rule, :category_id, :level)
+    params.require(:badge).permit(:name, :img_url, :rule, :rule_value)
   end
 
   def rescue_with_test_not_found

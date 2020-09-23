@@ -24,11 +24,9 @@ ActiveRecord::Schema.define(version: 2020_09_22_120925) do
     t.string "name", null: false
     t.string "img_url", null: false
     t.string "rule", null: false
-    t.integer "category_id"
-    t.integer "level"
+    t.string "rule_value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_badges_on_category_id"
   end
 
   create_table "categories", force: :cascade do |t|
