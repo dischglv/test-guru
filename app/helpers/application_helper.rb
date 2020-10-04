@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def badge_collection
     BadgeManager::BADGE_TYPES.map { |type|
-      [t("badge_type.#{badge.rule}"), type]
+      [t("badge_type.#{type}"), type]
     }
   end
 end

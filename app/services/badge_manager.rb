@@ -11,8 +11,8 @@ class BadgeManager
     @current_test = test_passage.test
     @current_user = test_passage.user
 
-    @last_date_category = TestPassage.all.order(created_at: :asc).select(:created_at).first
-    @last_date_level = @last_date_category
+    @last_awarded_date_level = update_last_awarded_date("level")
+    @last_awarded_date_category = update_last_awarded_date("category")
   end
 
 
@@ -27,17 +27,18 @@ class BadgeManager
     category = @current_test.category
     return unless @test_passage.passed? && category ==  badge.rule_value
 
-    tests_from_category = Test.where(category: category).select(:id).order(:id)
+    tests_from_category = Test.where(category: category).select(:id).order(:id).pluck(:test_id)
     passed_tests = TestPassage.where(user_id: @current_user.id, 
-                    created_at: @last_date_category..Time.current)
+                    created_at: @last_awarded_date_category..Time.current)
                    .joins(:test)
                    .where(tests: { category: category }, passed: true )
-                   .select(:id)
+                   .select(:test_id)
                    .distinct
-                   .order(:id)
+                   .order(:test_id)
+                   .pluck(:test_id)
 
     if passed_tests == tests_from_category
-      @last_date_category = get_last_date("category", category)
+      @last_awarded_date_category = update_last_awarded_date("category")
       true
     else
       false
@@ -55,30 +56,40 @@ class BadgeManager
     level = @current_test.level
     return unless @test_passage.passed? || level ==  badge.rule_value
 
-    tests_of_level = Test.where(level: level).select(:id).order(:id)
+    tests_of_level = Test.where(level: level).select(:id).order(:id).pluck(:id)
     passed_tests = TestPassage.where(user_id: @current_user.id,
-                    created_at: @last_date_level..Time.current)
+                    created_at: @last_awarded_date_level..Time.current)
                    .joins(:test)
                    .where(tests: { level: level }, passed: true)
-                   .select(:id)
+                   .select(:test_id)
                    .distinct
-                   .order(:id)
+                   .order(:test_id)
+                   .pluck(:test_id)
     
     if tests_of_level == passed_tests
-      @last_date_level = get_last_date("level", level)
+      @last_awarded_date_level = update_last_awarded_date("level")
       true
     else
       false
     end
   end
 
-  def get_last_date(attribute, value)
-    TestPassage.where(user_id: @current_user.id)
-               .joins(:test)
-               .where(tests: { "#{attribute}" => value}, passed: true)  
-               .select(:created_at)
-               .order(created_at: :asc)
-               .last
-  end
-  
+  def update_last_awarded_date(attribute)
+    if attribute == "category"
+      rule = "all_from_category"
+    else
+      rule = "all_of_level"
+    end
+
+    if @current_user.badges.any? { |badge| badge.rule == rule.to_s}
+      UserBadges.where(user_id: @current_user.id)
+                                           .join(:badges)
+                                           .where(rule: rule)
+                                           .order(created_at: :desc)
+                                           .limit(1)
+                                           .created_at
+    else
+      TestPassage.all.order(created_at: :asc).first.created_at
+    end
+  end  
 end
