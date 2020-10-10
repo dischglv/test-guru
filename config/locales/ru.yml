@@ -12,3 +12,8 @@ ru:
     tests:
       form_inline:
         submit: "ОК"
+
+  badge_types:
+    all_from_category: "Пройдены все тесты из категории"
+    all_of_level: "Пройдены все тесты уровня"
+    first_try: "Тест пройден с первого раза"

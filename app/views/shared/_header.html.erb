@@ -6,7 +6,8 @@
   <% if user_signed_in? %>
   
     <div class="nav user">
-      <p>Добро пожаловать, <b> <%= current_user.email %></b> гуру |
+      <p>Добро пожаловать, <b> <%= current_user.nickname %></b> гуру |
+      <%= link_to 'Бейджи', badges_path %> |
       <%= link_to 'Выход', destroy_user_session_path, method: :delete %></p>
     </div>
   <% end %>

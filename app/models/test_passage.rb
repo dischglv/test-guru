@@ -5,7 +5,6 @@ class TestPassage < ApplicationRecord
 
   before_validation :before_validation_set_current_question
 
-
   def current_progress
     (100 * (current_question_number - 1) / test.number_of_questions).round
   end
@@ -30,7 +29,8 @@ class TestPassage < ApplicationRecord
     if correct_answer?(answer_ids)
       self.correct_questions += 1
     end
-    
+
+    self.passed = true if success?    
     save!
   end
   

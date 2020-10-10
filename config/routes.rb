@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       post :gist
     end
   end
+
+  resources :badges, only: :index
   
   namespace :admin do
     resources :tests do
@@ -30,6 +32,7 @@ Rails.application.routes.draw do
     end
     
     resources :gists, only: :index
+    resources :badges, except: :show
 
     root to: 'tests#index'
   end

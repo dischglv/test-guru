@@ -11,6 +11,10 @@ class TestPassagesController < ApplicationController
     @test_passage.accept!(params[:answer_ids])
 
     if @test_passage.completed?
+      badge_manager = BadgeManager.new(@test_passage)
+      badges = badge_manager.award_badges
+      current_user.badges << badges
+
       TestsMailer.completed_test(@test_passage).deliver_now
       redirect_to result_test_passage_path(@test_passage)
     else
@@ -43,5 +47,4 @@ class TestPassagesController < ApplicationController
   def find_test_passage
     @test_passage = TestPassage.find(params[:id])
   end
-
 end
