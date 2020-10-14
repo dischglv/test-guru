@@ -2,13 +2,17 @@
 
 <h1>Прохождение теста <%= @test_passage.test.title %></h1>
 
+<p>Оставшееся время:</p>
+<%= content_tag :span, class: 'timer', data: { test_time: @test_passage.timer } do %>
+<% end %>
+
 <p>Вопрос <%= test_progress(@test_passage) %></p>
 
 <b>
   <%= @test_passage.current_question.question_text %>
 </b>
 
-<%= form_with url: test_passage_path(@test_passage), local: true, method: :put do |form| %>
+<%= form_with url: test_passage_path(@test_passage), local: true, class: 'form', method: :put do |form| %>
   <%= form.collection_check_boxes :answer_ids,
                                   @test_passage.current_question.answers,
                                   :id,

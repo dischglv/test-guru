@@ -30,8 +30,18 @@ class TestPassage < ApplicationRecord
       self.correct_questions += 1
     end
 
-    self.passed = true if success?    
+    self.passed = true if success? 
+    
+    current_question = nil if time_over?
     save!
+  end
+
+  def timer
+    test.timer
+  end
+
+  def time_over?
+    created_at - Time.now + timer * 60 <= 0
   end
   
   private
@@ -41,6 +51,7 @@ class TestPassage < ApplicationRecord
   end
   
   def correct_answer?(answer_ids)
+    return false unless answer_ids.present?
     correct_answers.ids.sort == answer_ids.map(&:to_i).sort
   end
   
